@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//testing db
+Route::get('/object-test', 'App\Http\Controllers\DBTestController@db_object_test');
