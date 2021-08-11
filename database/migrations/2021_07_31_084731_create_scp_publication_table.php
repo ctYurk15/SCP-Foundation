@@ -16,7 +16,7 @@ class CreateScpPublicationTable extends Migration
         Schema::create('scp_publication', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->integer('access-level');
+            $table->integer('access_level');
             $table->timestamps();
         });
     }

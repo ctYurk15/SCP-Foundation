@@ -16,7 +16,7 @@ class CreateScpPublicationPagePhotoTable extends Migration
         Schema::create('scp_publication_page_photo', function (Blueprint $table) {
             $table->increments('id');
             $table->string('image_way');
-            $table->integer('access-level');
+            $table->integer('access_level');
             $table->integer('order');
             $table->timestamps();
         });

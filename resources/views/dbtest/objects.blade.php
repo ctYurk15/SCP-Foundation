@@ -15,6 +15,23 @@
             Item: SCP-{{$item->number}} <i>({{$item->name}})</i><br>
             Object class: {{$item->class->title}}<br>
             <img src="images/objects/{{$item->photo}}" style="width: 300px;"><br>
+
+            @foreach($item->page_parts as $page_part)
+                @if($page_part->access_level == 1)
+                    <div style='background-color: lightgreen'>
+                @elseif($page_part->access_level == 2)
+                    <div style='background-color: green'>
+                @elseif($page_part->access_level == 3)
+                    <div style='background-color: yellow'>
+                @elseif($page_part->access_level == 4)
+                    <div style='background-color: orange'>
+                @elseif($page_part->access_level == 5)
+                    <div style='background-color: lightred'>
+                @endif
+                        {!! $page_part->content !!}
+                    </div>
+                    <br>
+            @endforeach
         </li>
     @endforeach
 </ul>

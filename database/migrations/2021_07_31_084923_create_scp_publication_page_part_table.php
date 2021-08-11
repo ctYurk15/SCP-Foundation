@@ -16,7 +16,7 @@ class CreateScpPublicationPagePartTable extends Migration
         Schema::create('scp_publication_page_part', function (Blueprint $table) {
             $table->increments('id');
             $table->text('content');
-            $table->integer('access-level');
+            $table->integer('access_level');
             $table->integer('order');
             $table->timestamps();
         });

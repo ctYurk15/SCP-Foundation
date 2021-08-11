@@ -18,7 +18,7 @@ class CreateScpObjectTable extends Migration
             $table->integer('number');
             $table->string('name');
             $table->string('photo');
-            $table->integer('access-level');
+            $table->integer('access_level');
             $table->timestamps();
         });
     }
