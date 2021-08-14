@@ -12,9 +12,13 @@ class DBTestController extends Controller
     {
         $classes = ObjectClass::all();
         $items = Item::all();
+
+        $access = $request->get('access') == NULL ? 1 : $request->get('access');
+
         return view('dbtest.objects', [
             "classes" => $classes,
-            "items" => $items
+            "items" => $items,
+            "access" => $access
         ]);
     }
 }

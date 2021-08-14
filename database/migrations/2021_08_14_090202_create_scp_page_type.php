@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateScpObjectPagePhotoTable extends Migration
+class CreateScpPageType extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateScpObjectPagePhotoTable extends Migration
      */
     public function up()
     {
-        Schema::create('scp_object_page_photo', function (Blueprint $table) {
+        Schema::create('scp_page_type', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('image_way');
-            $table->integer('access_level');
-            $table->integer('order');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateScpObjectPagePhotoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('scp_object_page_photo');
+        Schema::dropIfExists('scp_page_type');
     }
 }

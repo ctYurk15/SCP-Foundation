@@ -19,3 +19,9 @@ Route::get('/', function () {
 
 //testing db
 Route::get('/object-test', 'App\Http\Controllers\DBTestController@db_object_test');
+
+//main routes
+Route::get('/objects', 'App\Http\Controllers\MainController@objects');
+
+//admin routes
+Route::get('/admin/add-user', 'App\Http\Controllers\AdminController@add_user');
