@@ -38,7 +38,7 @@
                     @elseif($page_part->page_type->name == 'markup-text')
                         {!! $page_part->content !!}
                     @elseif($page_part->page_type->name == 'photo')
-                        <img src="images/{{$page_part->content}}">
+                        <img src="images/{{$page_part->content}}" style="width: 300px;">
                     @endif
                         </div>
                         <br>

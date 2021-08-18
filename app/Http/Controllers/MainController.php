@@ -19,4 +19,14 @@ class MainController extends Controller
             "access" => $access
         ]);
     }
+
+    public function object($number)
+    {
+        $object = Item::where('number', $number)->first();
+
+        return view("main.object", [
+            "object" => $object,
+            "access" => 4
+        ]);
+    }
 }
