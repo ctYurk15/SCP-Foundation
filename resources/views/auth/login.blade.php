@@ -24,8 +24,8 @@
                 @csrf
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" class="form-control" name="email" placeholder="Enter email" value="{{ old('email') }}">
-                        <span class="text-danger">@error('email') {{$message}} @enderror</span>
+                        <input type="login" class="form-control" name="login" placeholder="Enter login" value="{{ old('login') }}">
+                        <span class="text-danger">@error('login') {{$message}} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label>Password</label>
@@ -35,7 +35,6 @@
                     <br>
                     <button type="submit" class="btn btn-block btn-primary">Sign in</button>
                     <br>
-                    <a href="{{ route('auth.register') }}">I don`t have account</a>
                 </form>
             </div>
         </div>

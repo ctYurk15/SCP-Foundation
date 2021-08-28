@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\Admin;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -23,24 +24,34 @@ class AuthController extends Controller
     {
         //validation
         $request->validate([
+            'login' => 'required|unique:users',
             'name' => 'required',
-            'email' => 'required|email|unique:admins',
+            'home_address' => 'required',
+            'access_level' => 'required|integer|between:1,5',
+            'birthdate' => 'required',
+            'sex' => 'required',
+            'email' => 'required|email|unique:users',
             'password' => 'required|min:5|max:12'
         ]);
 
-        $save = Admin::create([
+        $save = User::create([
+            'login' => $request->get('login'),
             'name' => $request->get('name'),
+            'home_address' => $request->get('home_address'),
+            'access_level' => $request->get('access_level'),
+            'birthdate' => $request->get('birthdate'),
+            'sex' => $request->get('sex'),
             'email' => $request->get('email'),
             'password' => Hash::make($request->get('password'))
         ]);
 
         if($save != null)
         {
-            return back()->with('success', 'Success!');
+            return response()->json(["success" => true], 200);
         }
         else
         {
-            return back()->with('fail', 'Something wen`t wrong');
+            return response()->json(["success" => false], 400);
         }
 
     }
@@ -48,11 +59,11 @@ class AuthController extends Controller
     public function check(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
+            'login' => 'required',
             'password' => 'required|min:5|max:12'
         ]);
 
-        $user = Admin::where('email', '=', $request->email)->first();
+        $user = User::where('login', '=', $request->login)->first();
 
         if($user != null)
         {
@@ -68,7 +79,7 @@ class AuthController extends Controller
         }
         else
         {
-            return back()->with('fail', 'There is not user with such email');
+            return back()->with('fail', 'There is not user with such login');
         }
     }
 
@@ -83,7 +94,7 @@ class AuthController extends Controller
 
     public function dashboard()
     {
-        $data = ['LoggedUserInfo' => Admin::where('id', '=', session('LoggedUser'))->first()];
+        $data = ['LoggedUserInfo' => User::where('id', '=', session('LoggedUser'))->first()];
         return view('admin.dashboard', $data);
     }
 
