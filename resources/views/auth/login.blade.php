@@ -13,7 +13,7 @@
             <div class="col-md-4 col-md-offset-4">
                 <h4>Login</h4>
                 <hr>
-                <form action="{{ route('auth.check') }}" method="post">
+                <form data-url="{{ route('check') }}" method="post" id='loginForm'>
 
                 @if(Session::get('fail'))
                     <div class="alert alert-danger">
@@ -23,21 +23,22 @@
 
                 @csrf
                     <div class="form-group">
-                        <label>Email</label>
-                        <input type="login" class="form-control" name="login" placeholder="Enter login" value="{{ old('login') }}">
-                        <span class="text-danger">@error('login') {{$message}} @enderror</span>
+                        <label>Login</label>
+                        <input type="login" class="form-control" name="login" placeholder="Enter login">
                     </div>
                     <div class="form-group">
                         <label>Password</label>
                         <input type="password" class="form-control" name="password" placeholder="Enter password">
-                        <span class="text-danger">@error('password') {{$message}} @enderror</span>
                     </div>
                     <br>
                     <button type="submit" class="btn btn-block btn-primary">Sign in</button>
                     <br>
                 </form>
+                <span class="text-danger" id='errorText'></span>
             </div>
         </div>
     </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src='{{ asset("resources/js/login.js") }}'></script>
 </html>

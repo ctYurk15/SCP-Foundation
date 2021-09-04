@@ -45,4 +45,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function getCurrentUser()
+    {
+        return User::where('id', '=', session('LoggedUser'))->first();
+    }
 }

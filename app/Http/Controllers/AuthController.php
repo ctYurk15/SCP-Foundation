@@ -15,10 +15,10 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function register()
+   /* public function register()
     {
         return view('auth.register');
-    }
+    }*/
 
     public function save(Request $request)
     {
@@ -70,17 +70,13 @@ class AuthController extends Controller
             if(Hash::check($request->get('password'), $user->password))
             {
                 $request->session()->put('LoggedUser', $user->id);
-                return redirect('admin/dashboard');
+                return response()->json(["success" => true, 'url' => route('dashboard')], 200);
             }
-            else
-            {
-                return back()->with('fail', 'Wrong password');
-            }
+            
+            return response()->json(["success" => false, 'message' => 'Wrong password'], 401);
         }
-        else
-        {
-            return back()->with('fail', 'There is not user with such login');
-        }
+
+        return response()->json(["success" => false, 'message' => 'There is not user with such login'], 401);
     }
 
     public function logout()
@@ -88,14 +84,14 @@ class AuthController extends Controller
         if(session()->has('LoggedUser'))
         {
             session()->pull('LoggedUser');
-            return redirect('auth/login');
+            return redirect(route('login'));
         }
     }
 
     public function dashboard()
     {
         $data = ['LoggedUserInfo' => User::where('id', '=', session('LoggedUser'))->first()];
-        return view('admin.dashboard', $data);
+        return view('main.dashboard', $data);
     }
 
 }

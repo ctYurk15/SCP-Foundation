@@ -1,14 +1,14 @@
-<i>Access-level - {{$access}}. Change it in MainController</i>
+<i>Access-level - {{$LoggedUserInfo->access_level}}.</i>
 <h1>SCP-{{$object->number}}</h1>
 
-@if($object->access_level <= $access)
+@if($object->access_level <= $LoggedUserInfo->access_level)
 
     Item: SCP-{{$object->number}} <i>({{$object->name}})</i><br>
     Object class: {{$object->class->title}}<br>
     <img src="{{asset('images/objects/'.$object->photo)}}" style="width: 300px;" title="scp-{{$object->number}}"><br>
 
     @foreach($object->page_parts as $page_part)
-        @if($page_part->access_level <= $access)
+        @if($page_part->access_level <= $LoggedUserInfo->access_level)
                 <div>
                 @if($page_part->page_type->name == 'text')
                     {{ $page_part->content }}

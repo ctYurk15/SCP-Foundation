@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Item;
+use App\Models\User;
 
 class MainController extends Controller
 {
@@ -16,7 +17,7 @@ class MainController extends Controller
 
         return view('main.objects_list', [
             "objects" => $objects,
-            "access" => $access
+            "LoggedUserInfo" => User::getCurrentUser()
         ]);
     }
 
@@ -26,7 +27,7 @@ class MainController extends Controller
 
         return view("main.object", [
             "object" => $object,
-            "access" => 4
+            "LoggedUserInfo" => User::getCurrentUser()
         ]);
     }
 }

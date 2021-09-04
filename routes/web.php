@@ -18,16 +18,16 @@ Route::get('/', function () {
 });
 
 //auth routes 
-Route::post('/auth/check', 'App\Http\Controllers\AuthController@check')->name('auth.check');
-Route::post('/auth/save', 'App\Http\Controllers\AuthController@save')->name('auth.save');
-Route::get('/auth/logout', 'App\Http\Controllers\AuthController@logout')->name('auth.logout');
+Route::post('/check', 'App\Http\Controllers\AuthController@check')->name('check');
+Route::post('/save', 'App\Http\Controllers\AuthController@save')->name('save');
+Route::get('/logout', 'App\Http\Controllers\AuthController@logout')->name('logout');
 
 Route::group(['middleware' => ['AuthCheck']], function(){
-    Route::get('/auth/login', 'App\Http\Controllers\AuthController@login')->name('auth.login');
+    Route::get('/login', 'App\Http\Controllers\AuthController@login')->name('login');
 
     //admin routes
     Route::get('/admin/add-user', 'App\Http\Controllers\AdminController@add_user');
-    Route::get('/admin/dashboard', 'App\Http\Controllers\AuthController@dashboard')->name('admin.dashboard');
+    Route::get('/dashboard', 'App\Http\Controllers\AuthController@dashboard')->name('dashboard');
     
     //testing db
     Route::get('/object-test', 'App\Http\Controllers\DBTestController@db_object_test');
