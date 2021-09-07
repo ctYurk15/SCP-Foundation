@@ -1,3 +1,9 @@
+@extends('layouts.main')
+
+@section('title', 'SCP-'.$object->number)
+
+@section('content')
+
 <i>Access-level - {{$LoggedUserInfo->access_level}}.</i>
 <h1>SCP-{{$object->number}}</h1>
 
@@ -24,3 +30,5 @@
 @else
     <h3>Sorry, you dont have access to the object</h3>
 @endif
+
+@endsection
