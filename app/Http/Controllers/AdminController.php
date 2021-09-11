@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\User;
+
 class AdminController extends Controller
 {
-    public function add_user(Request $request)
+    public function users(Request $request)
     {
-        return view('admin.add_user');
+        return view('admin.users', [
+            'LoggedUserInfo' => User::getCurrentUser()
+        ]);
     }
 }

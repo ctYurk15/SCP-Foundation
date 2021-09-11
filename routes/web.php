@@ -26,7 +26,7 @@ Route::group(['middleware' => ['AuthCheck']], function(){
     Route::get('/login', 'App\Http\Controllers\AuthController@login')->name('login');
 
     //admin routes
-    Route::get('/admin/add-user', 'App\Http\Controllers\AdminController@add_user');
+    Route::get('/admin/users', 'App\Http\Controllers\AdminController@users')->name('admin-users');
     Route::get('/dashboard', 'App\Http\Controllers\AuthController@dashboard')->name('dashboard');
     
     //testing db
@@ -34,5 +34,6 @@ Route::group(['middleware' => ['AuthCheck']], function(){
 
     //main routes
     Route::get('/objects', 'App\Http\Controllers\MainController@objects')->name("objects");
+    Route::get('/publications', 'App\Http\Controllers\MainController@publications')->name("publications");
     Route::get('/object/{number}', 'App\Http\Controllers\MainController@object')->name("object");
 });

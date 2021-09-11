@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class AuthCheck
 {
@@ -16,12 +17,19 @@ class AuthCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!session()->has('LoggedUser') && ($request->path() != 'login' && $request->path() != 'register'))
+        //unauthorized user
+        if(!session()->has('LoggedUser') && ($request->path() != 'login'))
         {
             return redirect(route('login'))->with('fail', 'You must be logged in');
         }
 
-        if(session()->has('LoggedUser') && ($request->path() == 'login' || $request->path() == 'register'))
+        if(session()->has('LoggedUser') && strpos($request->path(), 'admin') !== false && User::getCurrentUser()->access_level < 4)
+        {
+            return redirect(route('dashboard'))->with('fail', 'Sorry, you don`t have enough access!');
+        }
+
+        //authorized user trying to get to login page
+        if(session()->has('LoggedUser') && ($request->path() == 'login'))
         {
             return redirect(route('dashboard'));
         }

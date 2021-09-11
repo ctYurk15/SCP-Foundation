@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Item;
 use App\Models\User;
+use App\Models\Publication;
 
 class MainController extends Controller
 {
@@ -21,6 +22,16 @@ class MainController extends Controller
         ]);
     }
 
+    public function publications(Request $request)
+    {   
+        $publications = Publication::all();
+
+        return view('main.publications', [
+            'publications' => $publications,
+            "LoggedUserInfo" => User::getCurrentUser()
+        ]);
+    }
+
     public function object($number)
     {
         $object = Item::where('number', $number)->first();
@@ -30,4 +41,6 @@ class MainController extends Controller
             "LoggedUserInfo" => User::getCurrentUser()
         ]);
     }
+
+    
 }

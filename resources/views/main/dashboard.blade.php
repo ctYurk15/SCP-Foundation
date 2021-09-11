@@ -4,6 +4,12 @@
 
 @section('content')
 
+@if(Session::get('fail'))
+    <div class='alert alert-danger'>
+        {{ Session::get('fail') }}
+    </div>
+@endif
+
 <table border='0px' width='50%'>
     <tr>
         <td colspan='2'>

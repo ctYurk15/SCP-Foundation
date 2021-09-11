@@ -1,8 +1,9 @@
 @extends('layouts.main')
 
-@section('title', 'Add new user')
+@section('title', 'Users')
 
 @section('content')
+<h3>Add new user</h3>
 <form id='addUserForm' data-route='{{ route("save") }}'>
     @csrf
     <h3>Main info</h3>
