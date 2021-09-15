@@ -2,3 +2,8 @@
 {
     width: 90%;
 }
+
+.formTable td
+{
+    width: 50%;
+}

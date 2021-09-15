@@ -22,6 +22,7 @@ $(document).ready(function(){
             },
             error: function(response){
                 alert('See errors in console');
+                
                 console.log(response);
                 console.log(response.responseJSON.errors);
             }

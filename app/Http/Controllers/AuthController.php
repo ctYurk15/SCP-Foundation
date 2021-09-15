@@ -34,25 +34,33 @@ class AuthController extends Controller
             'password' => 'required|min:5|max:12'
         ]);
 
-        $save = User::create([
-            'login' => $request->get('login'),
-            'name' => $request->get('name'),
-            'home_address' => $request->get('home_address'),
-            'access_level' => $request->get('access_level'),
-            'birthdate' => $request->get('birthdate'),
-            'sex' => $request->get('sex'),
-            'email' => $request->get('email'),
-            'password' => Hash::make($request->get('password'))
-        ]);
-
-        if($save != null)
+        if($request->access_level > User::getCurrentUser()->access_level)
         {
-            return response()->json(["success" => true], 200);
+            return response()->json(["success" => false, "errors" => 'You can`t add employee with higher access_level than your'], 400);
         }
         else
         {
-            return response()->json(["success" => false], 400);
+            $save = User::create([
+                'login' => $request->get('login'),
+                'name' => $request->get('name'),
+                'home_address' => $request->get('home_address'),
+                'access_level' => $request->get('access_level'),
+                'birthdate' => $request->get('birthdate'),
+                'sex' => $request->get('sex'),
+                'email' => $request->get('email'),
+                'password' => Hash::make($request->get('password'))
+            ]);
+    
+            if($save != null)
+            {
+                return response()->json(["success" => true], 200);
+            }
+            else
+            {
+                return response()->json(["success" => false], 400);
+            }
         }
+        
 
     }
 
