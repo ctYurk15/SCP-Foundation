@@ -1,0 +1,44 @@
+.publicationPartDiv
+{   
+    margin: 10px;
+    display: inline-block;
+}
+
+.publicationPartContentDiv
+{
+    border: 1px solid black;
+    border-radius: 7px;
+    width: 370px;
+    height: 30vh;
+    margin: 5px;
+    position: relative;
+    float: left;
+}
+
+.publicationPartArrowsDiv
+{
+    position: relative;
+    float: left;
+    margin: 5px;
+    padding-top: 20px;
+}
+
+.publicationPartButtonDiv
+{
+    position: relative;
+    float: left;
+    margin: 5px;
+    padding-top: 20px;
+}
+
+.Btn
+{
+    background-color: rgba(0, 0, 0, 0);
+    border-color: rgba(0, 0, 0, 0);
+    font-size: 3.5em;
+}
+
+.arrow:hover, .deleteBtn:hover
+{
+    cursor: pointer;
+}

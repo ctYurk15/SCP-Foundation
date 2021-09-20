@@ -5,7 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="{{ asset('resources/css/main.css') }}">
+    @yield('css')
     <title> @yield('title')</title>
 </head>
 <body>
@@ -34,7 +36,7 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{{ route('admin-users') }}">Employees</a></li>
                         <li><a class="dropdown-item" href="#">Objects</a></li>
-                        <li><a class="dropdown-item" href="#">News</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin-publications') }}">Publications</a></li>
                     </ul>
                 </li>
                 @endif

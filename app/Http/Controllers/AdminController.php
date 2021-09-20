@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\User;
+use App\Models\PageType;
 
 class AdminController extends Controller
 {
@@ -12,6 +13,16 @@ class AdminController extends Controller
     {
         return view('admin.users', [
             'LoggedUserInfo' => User::getCurrentUser()
+        ]);
+    }
+
+    public function publications()
+    {
+        $types = PageType::all();
+
+        return view('admin.publications', [
+            'LoggedUserInfo' => User::getCurrentUser(),
+            'types' => $types
         ]);
     }
 }
