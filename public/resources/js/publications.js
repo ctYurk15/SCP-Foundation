@@ -4,12 +4,72 @@ $(document).ready(function(){
     var partTemplate = $(".publicationPart").toArray()[0];
     var pagePartCount = 1;
 
+    function serializeArray(form)
+    {
+        var data_array = form.serializeArray();
+        var result = [];
+        
+        //adding title, access and token to result
+        result.push(new Object({name: 'title', value: data_array[0].value}));
+        result.push(new Object({name: 'access', value: data_array[1].value}));
+        result.push(new Object({name: 'parts', value: []}));
+
+        //adding array of page parts
+        var tmp_part = [];
+        var parts = [];
+
+        data_array.forEach(function(element){
+            if(element.name == 'partType[]' && tmp_part['partType'] == null)
+            {
+                tmp_part['partType'] = element.value;
+            }
+            else if(element.name == 'content[]' && tmp_part['content'] == null)
+            {
+                tmp_part['content'] = element.value;
+            }
+            else if(element.name == 'access[]' && tmp_part['access'] == null)
+            {
+                tmp_part['access'] = element.value;
+            }
+            
+            //we have full part, and can pass it into array
+            if(tmp_part['partType'] != null && tmp_part['content'] != null && tmp_part['access'] != null)
+            {
+                parts.push(new Object({partType: tmp_part['partType'], content: tmp_part['content'], access: tmp_part['access']}));
+                tmp_part = [];
+            }
+
+        });
+
+        result[2].value = parts;
+
+        return result;
+    }
+
     $("#addPublicationForm").submit(function(event){
         event.preventDefault();
 
-        var data_array = $(this).serializeArray();
+        var data_array = serializeArray($(this));
+       // var data_array = $(this).serializeArray();
+        var url = $(this).attr("data-url");
 
         console.log(data_array);
+
+        $.ajax({
+            type: "POST",
+            url: url, 
+            data: {
+                'publication': data_array,
+                '_token': $(this).attr('data-token'),
+                
+            },
+            success: function(data){
+                console.log(data);
+            },
+            error: function(data){
+                console.log(data);
+            }
+        });
     });
 
     $("#addPagePartBtn").on("click", function(){
@@ -21,9 +81,6 @@ $(document).ready(function(){
         
         //changing names&values of page part
         $(newPagePart).attr('data-index', pagePartCount);
-
-        $(newPagePart).find('select[name="partType0"]').attr('name', 'partType'+pagePartCount);
-        $(newPagePart).find('textarea[name="content0"]').attr('name', 'content'+pagePartCount);
 
         pagePartCount++;
     });

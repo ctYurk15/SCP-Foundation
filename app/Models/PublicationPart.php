@@ -12,6 +12,7 @@ class PublicationPart extends Model
     use HasFactory;
 
     protected $table = 'scp_publication_page_part';
+    public $fillable = ['content', 'publication_id', 'type_id', 'order', 'access_level'];
 
     public function page_type()
     {

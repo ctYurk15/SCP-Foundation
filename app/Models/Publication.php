@@ -12,6 +12,7 @@ class Publication extends Model
     use HasFactory;
 
     protected $table = 'scp_publication';
+    public $fillable = ['title', 'access_level'];
 
     public function parts()
     {

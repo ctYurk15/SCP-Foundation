@@ -16,12 +16,14 @@
                     <div class="card-body">
                         @foreach($publication->parts as $part)
                             <p class="card-text">
-                                @if($part->page_type->name == 'text')
-                                    {{ $part->content }}
-                                @elseif($part->page_type->name == 'markup-text')
-                                    {!! $part->content !!}
-                                @elseif($part->page_type->name == 'photo')
-                                    <img src="{{asset('images/publications/'.$part->content)}}" class='publication-image'>
+                                @if($LoggedUserInfo->access_level >= $part->access_level)
+                                    @if($part->page_type->name == 'text')
+                                        {{ $part->content }}
+                                    @elseif($part->page_type->name == 'markup-text')
+                                        {!! $part->content !!}
+                                    @elseif($part->page_type->name == 'photo')
+                                        <img src="{{asset('images/publications/'.$part->content)}}" class='publication-image'>
+                                    @endif
                                 @endif
                             </p>
                         @endforeach
