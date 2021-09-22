@@ -35,6 +35,34 @@
     cursor: pointer;
 }
 
+/*.galleryPhotoDiv
+{
+    width: 30%;
+    height: 10%;
+    border: 1px solid black;
+    vertical-align: middle;
+}
+
+.galleryPhotoDiv img
+{
+    width: 50%;
+    position: relative;
+    float: left;
+}*/
+
+.galleryPhotoDiv 
+{
+    width: 50%;
+    height: 10%;
+    vertical-align: middle;
+    margin: 10px;
+}
+
+.galleryPhotoDiv img
+{
+    width: 30%;
+}
+
 textarea
 {
     resize: both;

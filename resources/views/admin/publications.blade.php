@@ -21,7 +21,7 @@
 </table>
 
 <br>
-<h4>Publication parts:</h4>
+<h5>Publication parts:</h5>
 <div id='pagePartsContainer'>
     <div class='publicationPart publicationPartDiv' data-index='0'>
         <div class='publicationPartContentDiv'>
@@ -47,6 +47,17 @@
 
 <button type="submit" class="btn btn-success">Add new publication</button>
 </form>
+<br>
+
+<h3>Gallery: </h3>
+@foreach($files as $file)
+<div class="galleryPhotoDiv">
+    <img src='{{ asset("images/publications") }}/{{ $file->getFilename() }}'> 
+    
+    {{ $file->getFilename() }}
+</div><br>
+@endforeach
+
 @endsection
     
 @section('js')

@@ -35,6 +35,6 @@ class PublicationController extends Controller
             PublicationPart::create($part);
         }
 
-        return response()->json($parts[0]['content']);
+        return response()->json(['success' => true]);
     }
 }

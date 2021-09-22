@@ -64,7 +64,13 @@ $(document).ready(function(){
                 
             },
             success: function(data){
-                console.log(data);
+
+                if(data.success === true)
+                {
+                    alert("Success!");
+                    $("#addPublicationForm")[0].reset();
+                }
+                
             },
             error: function(data){
                 console.log(data);
