@@ -29,6 +29,7 @@ Route::group(['middleware' => ['AuthCheck']], function(){
     Route::get('/admin/users', 'App\Http\Controllers\AdminController@users')->name('admin-users');
     Route::get('/admin/publications', 'App\Http\Controllers\AdminController@publications')->name('admin-publications');
     Route::get('/dashboard', 'App\Http\Controllers\AuthController@dashboard')->name('dashboard');
+    Route::post('/admin/add-image', 'App\Http\Controllers\AdminController@addImage')->name('add-image');
 
     //adding records(from admin)
     Route::post('/admin/add-publication', 'App\Http\Controllers\PublicationController@save')->name('add-publication');
