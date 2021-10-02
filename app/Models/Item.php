@@ -13,6 +13,7 @@ class Item extends Model
     use HasFactory;
 
     protected $table = "scp_object";
+    protected $fillable = ['number', 'name', 'class_id', 'photo', 'access_level'];
 
     public function class()
     {

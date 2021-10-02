@@ -1,0 +1,12 @@
+.galleryPhotoDiv 
+{
+    width: 50%;
+    height: 10%;
+    vertical-align: middle;
+    margin: 10px;
+}
+
+.galleryPhotoDiv img
+{
+    width: 30%;
+}

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\File;
 
 use App\Models\User;
 use App\Models\PageType;
+use App\Models\ObjectClass;
 
 class AdminController extends Controller
 {
@@ -18,7 +19,7 @@ class AdminController extends Controller
         return $files;
     }
 
-    public function users(Request $request)
+    public function users()
     {
         return view('admin.users', [
             'LoggedUserInfo' => User::getCurrentUser()
@@ -37,6 +38,20 @@ class AdminController extends Controller
         ]);
     }
 
+    public function objects()
+    {
+        $types = PageType::all();
+        $classes = ObjectClass::all();
+        $files = $this->getGallery('objects');
+
+        return view('admin.objects', [
+            'LoggedUserInfo' => User::getCurrentUser(),
+            'files' => $files,
+            'classes' => $classes,
+            'types' => $types
+        ]);
+    }
+
     public function addImage(Request $request)
     {
         if ($file = $request->file('file')) 
@@ -51,7 +66,7 @@ class AdminController extends Controller
                 
             return Response()->json([
                 "success" => true,
-                "view" => view('ajax.gallery', ['files' => $this->getGallery('publications'), 'gallery_name' => 'publications'])->render()
+                "view" => view('ajax.gallery', ['files' => $this->getGallery($request->gallery_name), 'gallery_name' => $request->gallery_name])->render()
             ]);
     
         }

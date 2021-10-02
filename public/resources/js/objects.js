@@ -7,7 +7,7 @@ $(document).ready(function(){
     });
     
     //start values for page parts
-    var partTemplate = $(".publicationPart").toArray()[0];
+    var partTemplate = $(".objectPart").toArray()[0];
     var pagePartCount = 1;
 
     function serializeArray(form)
@@ -16,8 +16,11 @@ $(document).ready(function(){
         var result = [];
         
         //adding title, access to result
-        result.push(new Object({name: 'title', value: data_array[0].value}));
-        result.push(new Object({name: 'access', value: data_array[1].value}));
+        result.push(new Object({name: 'number', value: data_array[0].value}));
+        result.push(new Object({name: 'name', value: data_array[1].value}));
+        result.push(new Object({name: 'objectClass', value: data_array[2].value}));
+        result.push(new Object({name: 'photo', value: data_array[3].value}));
+        result.push(new Object({name: 'access', value: data_array[4].value}));
         result.push(new Object({name: 'parts', value: []}));
 
         //adding array of page parts
@@ -27,14 +30,17 @@ $(document).ready(function(){
         data_array.forEach(function(element){
             if(element.name == 'partType[]' && tmp_part['partType'] == null)
             {
+                console.log(1);
                 tmp_part['partType'] = element.value;
             }
             else if(element.name == 'content[]' && tmp_part['content'] == null)
             {
+                console.log(2);
                 tmp_part['content'] = element.value;
             }
             else if(element.name == 'access[]' && tmp_part['access'] == null)
             {
+                console.log(3);
                 tmp_part['access'] = element.value;
             }
             
@@ -43,16 +49,17 @@ $(document).ready(function(){
             {
                 parts.push(new Object({partType: tmp_part['partType'], content: tmp_part['content'], access: tmp_part['access']}));
                 tmp_part = [];
+                console.log(parts);
             }
 
         });
 
-        result[2].value = parts;
+        result[5].value = parts;
 
         return result;
     }
 
-    $("#addPublicationForm").submit(function(event){
+    $("#addObjectForm").submit(function(event){
         event.preventDefault();
 
         var data_array = serializeArray($(this));
@@ -64,7 +71,7 @@ $(document).ready(function(){
             type: "POST",
             url: url, 
             data: {
-                'publication': data_array,
+                'object': data_array,
                 '_token': $(this).attr('data-token'),
                 
             },
@@ -73,8 +80,9 @@ $(document).ready(function(){
                 if(data.success === true)
                 {
                     alert("Success!");
-                    $("#addPublicationForm")[0].reset();
+                    $("#addObjectForm")[0].reset();
                 }
+                else console.log(data);
                 
             },
             error: function(data){
@@ -85,7 +93,7 @@ $(document).ready(function(){
 
     $("#addPagePartBtn").on("click", function(){
         //adding new page part
-        $("#pagePartsContainer").append(partTemplate.outerHTML+"<br>");
+        $("#objectPartsContainer").append(partTemplate.outerHTML+"<br>");
 
         //getting new page part
         var newPagePart = $(".publicationPart").toArray()[pagePartCount];
@@ -100,7 +108,7 @@ $(document).ready(function(){
         pagePartCount--;
         
         $(".publicationPart").toArray()[pagePartCount].remove();
-        $("#pagePartsContainer").children('br').toArray()[pagePartCount].remove();
+        $("#objectPartsContainer").children('br').toArray()[pagePartCount].remove();
         
     });
 

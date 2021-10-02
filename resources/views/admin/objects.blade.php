@@ -1,30 +1,48 @@
 @extends('layouts.main')
 
-@section('title', 'Publications')
+@section('title', 'Objects')
 
 @section('css')
-<link rel='stylesheet' href='{{ asset("resources/css/publications.css") }}'>
 <link rel='stylesheet' href='{{ asset("resources/css/gallery.css") }}'>
 @endsection
 
 @section('content')
-<h3>Add new publication</h3>
-<form id='addPublicationForm' data-url="{{ route('add-publication') }}" data-token="{{ csrf_token() }}">
+<h3>Add new object</h3>
+<form id='addObjectForm' data-url="{{ route('add-object') }}" data-token="{{ csrf_token() }}">
 <table class='formTable'>
     <tr>
-        <td><label for='title'>Title</title></td>
-        <td><input type='text' name='title' placeholder='Example: New employee' required></td>
+        <td><label for='number'>Number</title></td>
+        <td><input type='number' name='number' placeholder='Example: 1793' required></td>
     </tr>
     <tr>
-        <td><label for='title'>Access</title></td>
+        <td><label for='name'>Name</title></td>
+        <td><input type='text' name='name' placeholder='Example: magical pills' required></td>
+    </tr>
+    <tr>
+        <td><label for='objectClass'>Object class</title></td>
+        <td>
+            <select class="form-select form-select-lg mb-3" name='objectClass' required>
+                <option value='-' selected disabled>Select one</option>
+                @foreach($classes as $class)
+                    <option value='{{ $class->id }}'>{{ $class->title }}</option>
+                @endforeach
+            </select><br>
+        </td>
+    </tr>
+    <tr>
+        <td><label for='photo'>Photo</title></td>
+        <td><input type='text' name='photo' placeholder='Photo name from gallery' required></td>
+    </tr>
+    <tr>
+        <td><label for='access'>Access</title></td>
         <td><input type='text' name='access' placeholder='NUMBERS ONLY(1-5)' required></td>
     </tr>
 </table>
 
 <br>
-<h5>Publication parts:</h5>
-<div id='pagePartsContainer'>
-    <div class='publicationPart publicationPartDiv' data-index='0'>
+<h5>Object document parts:</h5>
+<div id='objectPartsContainer'>
+    <div class='publicationPart publicationPartDiv objectPart' data-index='0'>
         <div class='publicationPartContentDiv'>
             <label for='partType'>Page part type: </label><br>
             <select class="form-select form-select-lg mb-3" name='partType[]' required>
@@ -46,15 +64,15 @@
 <button type='button' class='Btn material-icons' id='addPagePartBtn'>add</button>
 <button type='button' class="Btn material-icons" id='deletePagePartBtn'>delete</button><br><br>
 
-<button type="submit" class="btn btn-success">Add new publication</button>
+<button type="submit" class="btn btn-success">Add new object</button>
 </form>
 <br>
 
-@include('parts.gallery', ['gallery_name' => 'publications'])
+@include('parts.gallery', ['gallery_name' => 'objects'])
 
 @endsection
     
 @section('js')
-<script src="{{ asset('resources/js/publications.js') }}"></script>
+<script src="{{ asset('resources/js/objects.js') }}"></script>
 <script src="{{ asset('resources/js/gallery.js') }}"></script>
 @endsection

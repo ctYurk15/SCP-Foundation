@@ -36,7 +36,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{{ route('admin-users') }}">Employees</a></li>
-                        <li><a class="dropdown-item" href="#">Objects</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin-objects') }}">Objects</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin-publications') }}">Publications</a></li>
                     </ul>
                 </li>

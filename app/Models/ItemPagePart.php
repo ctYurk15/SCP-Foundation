@@ -11,6 +11,7 @@ class ItemPagePart extends Model
 {
     use HasFactory;
 
+    public $fillable = ['content', 'object_id', 'type_id', 'order', 'access_level'];
     protected $table="scp_object_page_part";
 
     public function page_type()
